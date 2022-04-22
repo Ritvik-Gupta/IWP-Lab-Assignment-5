@@ -1,0 +1,205 @@
+/* 
+
+Global Settings 
+
+*/
+
+body {
+	background-color: gainsboro;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	overflow: hidden;
+}
+
+/* 
+
+Window Settings 
+
+*/
+
+section {
+	display: flex;
+	margin: 10vh 2vw;
+	height: 80vh;
+}
+
+/* 
+
+Form Settings
+
+*/
+
+section > form {
+	border-radius: 10px;
+	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.4);
+	flex: 2;
+	padding: 10px;
+	margin: 0 10px;
+	position: relative;
+	text-align: center;
+}
+
+section > form .title {
+	font-size: 18px;
+	text-transform: uppercase;
+	color: #2c3e50;
+	margin-bottom: 20px;
+}
+
+section > form input,
+section > form textarea {
+	padding: 15px;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	margin-bottom: 15px;
+	width: 90%;
+	box-sizing: border-box;
+	color: #2c3e50;
+	font-size: 13px;
+	font-family: inherit;
+}
+
+section > form input[type="submit"] {
+	width: 100px;
+	background: tomato;
+	font-weight: bold;
+	color: #fff;
+	transition: 150ms;
+	border: 0 none;
+	border-radius: 5px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+section > form input:focus {
+	outline: none;
+	border-color: #777;
+	color: #637373;
+}
+
+/*
+
+Task View Main Settings 
+
+*/
+
+section > main {
+	border-radius: 10px;
+	padding: 10px;
+	flex: 5;
+	overflow-y: scroll;
+	scroll-behavior: smooth;
+	box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.4);
+}
+
+/* Task */
+[data-id] {
+	display: flex;
+	margin-bottom: 6vh;
+	margin: 2vw 0;
+	border: 6px solid transparent;
+	box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.4);
+	transition: 0.4s ease-in-out;
+	border-left: 6px solid seagreen;
+}
+
+[data-id].pending {
+	border-left: 6px solid firebrick;
+}
+
+[data-id].expired {
+	background-color: #2aad4080;
+	border-right: 6px solid seagreen;
+}
+
+[data-id].pending.expired {
+	background-color: #c4464577;
+	border-right: 6px solid firebrick;
+}
+
+[data-id] .tooltip-text {
+	visibility: hidden;
+	width: 120px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 5px;
+	position: absolute;
+	z-index: 1;
+	bottom: 80%;
+	left: 50%;
+	margin-left: -60px;
+}
+
+[data-id] .tooltip-text::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: black transparent transparent transparent;
+}
+
+[data-id]:hover {
+	transform: scale(1.01);
+}
+
+[data-id]:hover .tooltip-text {
+	visibility: visible;
+}
+
+/* Task Content and Delete Button */
+[data-id] > .content {
+	flex: 7;
+	margin: 1vh 2vw;
+}
+
+[data-id] > .delete-action {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: 0.4s ease-in-out;
+}
+
+[data-id] > .delete-action:hover {
+	background-color: firebrick;
+}
+
+[data-id] > .delete-action > img {
+	transition: 0.4s ease-in-out;
+}
+
+[data-id] > .delete-action:hover > img {
+	transform: scale(1.2) rotateZ(15deg);
+	filter: invert(1);
+}
+
+/* 
+
+Scrollbar Settings
+
+*/
+
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey;
+	border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: saddlebrown;
+	border-radius: 10px;
+}
