@@ -11,7 +11,6 @@ const CREATE_TABLE_QUERY = "CREATE TABLE tasks(
     is_pending TINYINT NOT NULL DEFAULT 1
 );";
 
-
 $db = new mysqli(HOST, USERNAME, PASSWORD, DATABASE_NAME);
 
 if ($db->connect_error)

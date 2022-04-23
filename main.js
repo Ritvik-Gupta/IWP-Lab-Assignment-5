@@ -8,6 +8,8 @@ tasks.forEach(task => {
 			body: JSON.stringify({ taskId: task.dataset.id }),
 		})
 
+		console.log(res)
+
 		if (res.status != 200) return
 
 		task.remove()
@@ -23,6 +25,8 @@ tasks.forEach(task => {
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ taskId: task.dataset.id, willBePending: !isPending }),
 		})
+
+		console.log(res)
 
 		if (res.status != 200) return
 

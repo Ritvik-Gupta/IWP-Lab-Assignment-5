@@ -10,7 +10,6 @@ $db = new mysqli(HOST, USERNAME, PASSWORD, DATABASE_NAME);
 if ($db->connect_error)
     die("Connection failed: " . $db->connect_error);
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $insert_stmt = $db->prepare(INSERT_MUTATION);
     $insert_stmt->bind_param("sss", $title, $body, $finishing_date);
