@@ -2,7 +2,7 @@
 
 const HOST = "localhost", USERNAME = "root", PASSWORD = "", DATABASE_NAME = "scheduler";
 
-const INSERT_MUTATION = "INSERT INTO tasks(title, body, finishing_date, is_pending) VALUES (?, ?, ?, ?);";
+const INSERT_MUTATION = "INSERT INTO tasks(title, body, finishing_date) VALUES (?, ?, ?);";
 const SELECT_QUERY = "SELECT * FROM tasks";
 
 $db = new mysqli(HOST, USERNAME, PASSWORD, DATABASE_NAME);
@@ -13,12 +13,11 @@ if ($db->connect_error)
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $insert_stmt = $db->prepare(INSERT_MUTATION);
-    $insert_stmt->bind_param("sssi", $title, $body, $finishing_date, $is_pending);
+    $insert_stmt->bind_param("sss", $title, $body, $finishing_date);
 
     $title = $_POST["title"];
     $body = $_POST["body"];
     $finishing_date = $_POST["finishing_date"];
-    $is_pending = $_POST["is_pending"];
 
     if ($insert_stmt->execute() === false)
         die("Failed to Insert a new Task\n" . $insert_stmt->error);
@@ -26,58 +25,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $insert_stmt->close();
 }
 
-$result = $conn->query(SELECT_QUERY);
+$result = $db->query(SELECT_QUERY);
 
 $dataset = array();
 while ($row = $result->fetch_assoc()) {
-    print_r($row);
+    $row["create_date"] = date("Y-m-d", strtotime($row["create_date"]));
+    $row["finishing_date"] = date("Y-m-d", strtotime($row["finishing_date"]));
     array_push($dataset, $row);
 }
 
 $db->close();
-
-// $dataset = array(
-//     array(
-//         "id" => 1,
-//         "title" => "T1",
-//         "body" => "B1",
-//         "create_date" => "2021-11-01",
-//         "finishing_date" => "2022-11-01",
-//         "is_pending" => true
-//     ),
-//     array(
-//         "id" => 2,
-//         "title" => "T2",
-//         "body" => "B2",
-//         "create_date" => "2021-11-01",
-//         "finishing_date" => "2022-11-01",
-//         "is_pending" => false
-//     ),
-//     array(
-//         "id" => 3,
-//         "title" => "T3",
-//         "body" => "B3",
-//         "create_date" => "2021-11-01",
-//         "finishing_date" => "2022-11-01",
-//         "is_pending" => false
-//     ),
-//     array(
-//         "id" => 4,
-//         "title" => "T4",
-//         "body" => "B4",
-//         "create_date" => "2021-11-01",
-//         "finishing_date" => "2022-11-01",
-//         "is_pending" => true
-//     ),
-//     array(
-//         "id" => 5,
-//         "title" => "T5",
-//         "body" => "B5",
-//         "create_date" => "2021-11-01",
-//         "finishing_date" => "2022-01-01",
-//         "is_pending" => false
-//     ),
-// );
 
 ?>
 
